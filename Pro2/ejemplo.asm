@@ -96,6 +96,7 @@ yJugador      db 0
 xObjetivo      db 0
 yObjetivo      db 0
 puntos        dw 0
+bandera      db 0
 ;; MENÚS
 opcion        db 0
 maximo        db 0
@@ -152,7 +153,6 @@ ciclo_juego:
 		call entrada_juego
 		jmp ciclo_juego
 		;;;;;;;;;;;;;;;;
-
 cargar_un_nivel:
 		mov AL, 00
 		mov DX, offset nivel_x
@@ -908,7 +908,7 @@ mover_objeto_arr:
 		pop AX
 
 		mov DL, SUELO
-		;;dec AL
+		inc AL
 		call colocar_en_mapa
 		ret
 mover_jugador_aba:
@@ -1037,67 +1037,16 @@ mover_jugador_der:
 		call colocar_en_mapa
 		ret
 hay_equis_general:
-		mov DL, JUGADOR
-		push AX
-		call colocar_en_mapa
-		pop AX
-		;
-		mov DL, SUELO
-		dec AH
-		call colocar_en_mapa
-		call mover_jugador_der
-		;
-		mov DX, offset iniciales
-		mov AH,09
-		int 21
-		mov AH, 01
-		int 16
-		jz fin_entrada_juego  ;; nada en el buffer de entrada
-		mov AH, 00
-		int 16
-		;; AH <- scan code
-		cmp AH, [control_arriba]
-		;je mover_jugador_arr
-		cmp AH, [control_abajo]
-		;je mover_jugador_aba
-		cmp AH, [control_izquierda]
-		;je mover_jugador_izq
-		cmp AH, [control_derecha]
-		je mover_equis_der
-		cmp AH, 3c
-		call delay
-		mov DX, offset cargar_nivel
-		mov AH,09
-		int 21
-		ret
-mover_equis_der:
-		mov AH, [xJugador]
-		mov AL, [yJugador]
-		inc AH
-		push AX
-		call obtener_de_mapa
-		pop AX
-		;; DL <- elemento en mapa
-		cmp DL, PARED
-		je hay_pared_general
-		cmp DL, CAJA
-		je mover_objeto_der
-		cmp DL, OBJETIVO
-		je hay_equis_general
 		mov [xJugador], AH
-		;;
+		
 		mov DL, JUGADOR
 		push AX
 		call colocar_en_mapa
 		pop AX
-		;;
+		;
 		mov DL, SUELO
 		dec AH
 		call colocar_en_mapa
-		mov DL, OBJETIVO
-		push AX
-		call colocar_en_mapa
-		pop AX
 		ret
 mover_objeto_der:
 		inc AH
