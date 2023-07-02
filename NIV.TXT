@@ -1,9 +1,10 @@
-# paredes
+-
 pared 02, 01
 pared 03, 01
 pared 04, 01
 pared 05, 01
 pared 06, 01
+pared 07, 01
 -
 pared 00, 02
 pared 01, 02
@@ -72,8 +73,7 @@ pared 04, 09
 pared 05, 09
 pared 06, 09
 pared 07, 09
-
-# cajas
+-
 caja  03, 03
 caja  04, 04
 caja  04, 05
@@ -81,15 +81,12 @@ caja  01, 07
 caja  03, 07
 caja  04, 07
 caja  05, 07
-
-# objetivos
-objetivo 01, 03
+-
 objetivo 05, 04
 objetivo 01, 05
 objetivo 04, 06
-objetivo 03, 07
+objetivo 04, 03
 objetivo 06, 07
 objetivo 04, 08
-
-# jugador
-jugador  02, 03
+-
+jugador  01, 03
